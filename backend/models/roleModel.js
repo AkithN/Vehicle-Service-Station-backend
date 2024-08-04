@@ -3,12 +3,13 @@ const db = require('../config/db');
 
 class RoleModel {
   static async getAllRoles() {
-    const [rows] = await db.query('SELECT * FROM roles');
+    const [rows] = await db.query('SELECT * FROM roles WHERE status = "Active"');
     return rows;
   }
+  
 
   static async getRoleById(roleId) {
-    const [rows] = await db.query('SELECT * FROM roles WHERE roleId = ?', [roleId]);
+    const [rows] = await db.query('SELECT * FROM roles WHERE roleId = ? AND status = "Active"', [roleId]);
     return rows[0];
   }
 
