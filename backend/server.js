@@ -1,10 +1,12 @@
-// server.js
+//server.js
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const roleRoutes = require('./routes/roleRoutes');
 const authRoutes = require('./routes/authRoutes');
+const userRoutes = require('./routes/userRoutes');
 
 dotenv.config();
 
@@ -18,6 +20,7 @@ app.use(bodyParser.json());
 // Routes
 app.use('/api/roles', roleRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/users', userRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
