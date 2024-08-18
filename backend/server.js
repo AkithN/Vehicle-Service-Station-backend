@@ -1,5 +1,3 @@
-//server.js
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -7,6 +5,7 @@ const dotenv = require('dotenv');
 const roleRoutes = require('./routes/roleRoutes');
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
+const contactRoutes = require('./routes/contactRoutes');
 
 dotenv.config();
 
@@ -21,10 +20,11 @@ app.use(bodyParser.json());
 app.use('/api/roles', roleRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/contactus/contact', contactRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
-  console.error('Unhandled error:', err); // Log unhandled errors
+  console.error('Unhandled error:', err.message); // Log the error message
   res.status(500).json({ error: 'An unexpected error occurred' });
 });
 
