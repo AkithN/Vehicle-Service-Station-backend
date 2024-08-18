@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 app.use('/api/roles', roleRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
-app.use('/api/contactus/contact', contactRoutes);
+app.use('/api/contactus', contactRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {

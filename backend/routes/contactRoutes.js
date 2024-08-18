@@ -14,4 +14,14 @@ router.post('/', async (req, res, next) => {
   }
 });
 
+// GET /api/contactus
+router.get('/', async (req, res, next) => {
+  try {
+    const contacts = await ContactModel.getAllContacts();
+    res.status(200).json(contacts);
+  } catch (err) {
+    next(err);
+  }
+});
+
 module.exports = router;
