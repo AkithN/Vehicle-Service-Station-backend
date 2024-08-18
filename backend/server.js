@@ -6,6 +6,7 @@ const roleRoutes = require('./routes/roleRoutes');
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 const contactRoutes = require('./routes/contactRoutes');
+const inquiriesRoutes = require('./routes/inquiriesRoutes');
 
 dotenv.config();
 
@@ -21,10 +22,12 @@ app.use('/api/roles', roleRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/contactus', contactRoutes);
+app.use('/api/contactus/contact', contactRoutes);
+app.use('/api/inquiries', inquiriesRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
-  console.error('Unhandled error:', err.message); // Log the error message
+  console.error('Unhandled error:', err.message);
   res.status(500).json({ error: 'An unexpected error occurred' });
 });
 
