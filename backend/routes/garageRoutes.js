@@ -1,32 +1,39 @@
-// routes/registerGarageRoutes.js
-const express = require('express');
-const multer = require('multer');
-const GarageModel = require('../models/garageModel');
+// const express = require('express');
+// const multer = require('multer');
+// const GarageModel = require('../models/garageModel');
 
-const router = express.Router();
+// const router = express.Router();
 
-// Configure Multer to handle image uploads
-const upload = multer({
-    storage: multer.memoryStorage(),
-    limits: { fileSize: 5 * 1024 * 1024 }, // 5 MB limit
-});
+// // Configure Multer to handle image uploads
+// const upload = multer({
+//     storage: multer.memoryStorage(),
+//     limits: { fileSize: 5 * 1024 * 1024 }, // 5 MB limit per file
+// }).fields([{ name: 'image1' }, { name: 'image2' }, { name: 'image3' }]);
 
-router.post('/register', upload.fields([{ name: 'image1' }, { name: 'image2' }, { name: 'image3' }]), async (req, res) => {
-    try {
-        const data = req.body;
-        const images = [
-            req.files['image1'] ? req.files['image1'][0].buffer.toString('base64') : null,
-            req.files['image2'] ? req.files['image2'][0].buffer.toString('base64') : null,
-            req.files['image3'] ? req.files['image3'][0].buffer.toString('base64') : null,
-        ];
+// // Route to register a new garage
+// router.post('/register', (req, res) => {
+//     upload(req, res, async (uploadError) => {
+//         if (uploadError) {
+//             console.error('File upload error:', uploadError.message);
+//             return res.status(400).json({ error: 'File upload failed' });
+//         }
 
-        await GarageModel(data, images);
+//         try {
+//             const data = req.body;
+//             const images = [
+//                 req.files['image1'] ? req.files['image1'][0].buffer.toString('base64') : null,
+//                 req.files['image2'] ? req.files['image2'][0].buffer.toString('base64') : null,
+//                 req.files['image3'] ? req.files['image3'][0].buffer.toString('base64') : null,
+//             ];
 
-        res.status(200).json({ message: 'Garage registered successfully!' });
-    } catch (error) {
-        console.error('Error registering garage:', error);
-        res.status(500).json({ error: 'Failed to register garage' });
-    }
-});
+//             await GarageModel.registerGarage(data, images);
 
-module.exports = router;
+//             res.status(201).json({ message: 'Garage registered successfully!' });
+//         } catch (error) {
+//             console.error('Error registering garage:', error.message);
+//             res.status(500).json({ error: 'Failed to register garage' });
+//         }
+//     });
+// });
+
+// module.exports = router;
