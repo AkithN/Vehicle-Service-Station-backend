@@ -8,6 +8,7 @@ const userRoutes = require('./routes/userRoutes');
 const contactRoutes = require('./routes/contactRoutes');
 const inquiriesRoutes = require('./routes/inquiriesRoutes');
 const garageRoutes = require('./routes/garageRoutes');
+const offersRoutes = require('./routes/offersRoutes'); 
 
 dotenv.config();
 
@@ -26,6 +27,7 @@ app.use('/api/contactus', contactRoutes);
 app.use('/api/contactus/contact', contactRoutes);
 app.use('/api/inquiries', inquiriesRoutes);
 app.use('/api/garages', garageRoutes);
+app.use('/api/offers', offersRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
