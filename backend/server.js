@@ -7,7 +7,7 @@ const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 const contactRoutes = require('./routes/contactRoutes');
 const inquiriesRoutes = require('./routes/inquiriesRoutes');
-// const garageRoutes = require('./routes/garageRoutes');
+const garageRoutes = require('./routes/garageRoutes');
 
 dotenv.config();
 
@@ -25,7 +25,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/contactus', contactRoutes);
 app.use('/api/contactus/contact', contactRoutes);
 app.use('/api/inquiries', inquiriesRoutes);
-// app.use('/api/garages', garageRoutes);
+app.use('/api/garages', garageRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
