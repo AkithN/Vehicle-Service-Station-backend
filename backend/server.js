@@ -10,6 +10,10 @@ const inquiriesRoutes = require('./routes/inquiriesRoutes');
 const offersRoutes = require('./routes/offersRoutes');
 const packagesRoutes = require('./routes/packagesRoutes');
 const garageRoutes = require('./routes/garageRoutes');
+const newsRoutes = require('./routes/newsRoutes');
+
+
+
 
 dotenv.config();
 
@@ -32,6 +36,7 @@ app.use('/api/inquiries', inquiriesRoutes);
 app.use('/api/garages', garageRoutes);
 app.use('/api/offers', offersRoutes);
 app.use('/api/packages', packagesRoutes);
+app.use('/api/news', newsRoutes);
 app.use('/uploads', express.static('uploads'));
 
 
