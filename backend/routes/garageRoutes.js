@@ -7,7 +7,7 @@ const GarageModel = require('../models/garageModel');
 const router = express.Router();
 
 // Ensure the uploads directory exists
-const uploadDir = 'uploads/';
+const uploadDir = path.join(__dirname, '../uploads');
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true });
 }
@@ -27,8 +27,7 @@ const upload = multer({ storage: storage });
 // Create a new garage
 router.post('/', upload.fields([{ name: 'image1' }, { name: 'image2' }, { name: 'image3' }]), async (req, res) => {
   try {
-    // Check if files are uploaded and log them
-    console.log('Uploaded files:', req.files);
+    console.log('Uploaded files:', req.files); // Log uploaded files to verify
 
     const garageData = {
       ...req.body,
@@ -37,6 +36,8 @@ router.post('/', upload.fields([{ name: 'image1' }, { name: 'image2' }, { name: 
       image3: req.files['image3'] ? `/uploads/${req.files['image3'][0].filename}` : null,
     };
 
+    console.log('Garage Data:', garageData); // Log garage data to verify
+
     const newGarage = await GarageModel.addGarage(garageData);
     res.status(201).json({ message: 'Garage registered successfully', garage: newGarage });
   } catch (error) {
@@ -44,6 +45,7 @@ router.post('/', upload.fields([{ name: 'image1' }, { name: 'image2' }, { name: 
     res.status(500).json({ error: 'Error registering garage' });
   }
 });
+
 
 // Get all garages
 router.get('/', async (req, res) => {
