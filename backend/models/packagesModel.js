@@ -8,8 +8,8 @@ class PackageModel {
       const [result] = await db.query(query, [packageName, packageDescription, price, packageImage]);
       return { packageId: result.insertId, ...packageData };
     } catch (error) {
-      console.error('Database insert error:', error);  // Added better logging
-      throw error;  // Throw error to be caught by the controller
+      console.error('Database insert error:', error);
+      throw error;
     }
   }
 
