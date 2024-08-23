@@ -32,7 +32,7 @@ app.use('/api/inquiries', inquiriesRoutes);
 app.use('/api/garages', garageRoutes);
 app.use('/api/offers', offersRoutes);
 app.use('/api/packages', packagesRoutes);
-app.use('/api/garages', garageRoutes);
+
 
 
 
