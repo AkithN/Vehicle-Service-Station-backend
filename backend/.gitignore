@@ -50,3 +50,5 @@ build/
 *.swp
 *.bak
 *.pid
+# Ignore uploads folder
+uploads/

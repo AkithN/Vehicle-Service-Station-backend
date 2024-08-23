@@ -2,10 +2,15 @@ const db = require('../config/db');
 
 class PackageModel {
   static async addPackage(packageData) {
-    const { packageName, packageDescription, price } = packageData;
-    const query = 'INSERT INTO packages (packageName, packageDescription, price) VALUES (?, ?, ?)';
-    const [result] = await db.query(query, [packageName, packageDescription, price]);
-    return { packageId: result.insertId, ...packageData };
+    try {
+      const { packageName, packageDescription, price, packageImage } = packageData;
+      const query = 'INSERT INTO packages (packageName, packageDescription, price, packageImage) VALUES (?, ?, ?, ?)';
+      const [result] = await db.query(query, [packageName, packageDescription, price, packageImage]);
+      return { packageId: result.insertId, ...packageData };
+    } catch (error) {
+      console.error('Database insert error:', error);  // Added better logging
+      throw error;  // Throw error to be caught by the controller
+    }
   }
 
   static async getAllPackages() {
@@ -21,9 +26,9 @@ class PackageModel {
   }
 
   static async updatePackage(packageId, packageData) {
-    const { packageName, packageDescription, price } = packageData;
-    const query = 'UPDATE packages SET packageName = ?, packageDescription = ?, price = ? WHERE packageId = ?';
-    await db.query(query, [packageName, packageDescription, price, packageId]);
+    const { packageName, packageDescription, price, packageImage } = packageData;
+    const query = 'UPDATE packages SET packageName = ?, packageDescription = ?, price = ?, packageImage = ? WHERE packageId = ?';
+    await db.query(query, [packageName, packageDescription, price, packageImage, packageId]);
     return packageData;
   }
 

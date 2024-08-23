@@ -8,13 +8,16 @@ const userRoutes = require('./routes/userRoutes');
 const contactRoutes = require('./routes/contactRoutes');
 const inquiriesRoutes = require('./routes/inquiriesRoutes');
 const garageRoutes = require('./routes/garageRoutes');
-const offersRoutes = require('./routes/offersRoutes'); 
-const packagesRoutes = require('./routes/packagesRoutes'); // Corrected path
+const offersRoutes = require('./routes/offersRoutes');
+const packagesRoutes = require('./routes/packagesRoutes');  // Corrected path
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+// Serve static files in the 'uploads' folder
+app.use('/uploads', express.static('uploads'));
 
 // Middleware
 app.use(cors());
@@ -25,7 +28,6 @@ app.use('/api/roles', roleRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/contactus', contactRoutes);
-app.use('/api/contactus/contact', contactRoutes);
 app.use('/api/inquiries', inquiriesRoutes);
 app.use('/api/garages', garageRoutes);
 app.use('/api/offers', offersRoutes);
