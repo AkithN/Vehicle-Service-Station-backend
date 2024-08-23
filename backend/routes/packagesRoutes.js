@@ -8,7 +8,7 @@ const router = express.Router();
 // Set up multer for file uploads
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'uploads/');  // Ensure the 'uploads' directory exists
+    cb(null, 'uploads/');
   },
   filename: function (req, file, cb) {
     cb(null, `${Date.now()}-${file.originalname}`);
@@ -20,12 +20,11 @@ const upload = multer({ storage: storage });
 // Create a new package
 router.post('/', upload.single('packageImage'), async (req, res) => {
   try {
-    // Log the uploaded file to verify it's being received
     if (req.file) console.log('Uploaded file:', req.file);
 
     const packageData = {
       ...req.body,
-      packageImage: req.file ? `/uploads/${req.file.filename}` : null  // Save the file path
+      packageImage: req.file ? `/uploads/${req.file.filename}` : null
     };
     const newPackage = await PackageModel.addPackage(packageData);
     res.status(201).json({ message: 'Package created successfully', package: newPackage });
