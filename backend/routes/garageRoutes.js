@@ -110,4 +110,27 @@ router.delete('/:garageId', async (req, res) => {
   }
 });
 
+// Search garages by name, district, or province with pagination
+router.get('/search', async (req, res) => {
+  try {
+    const { query, page = 1, limit = 10 } = req.query;
+    if (!query) {
+      return res.status(400).json({ error: 'Query parameter is required' });
+    }
+
+    const offset = (page - 1) * limit;
+    const { results, total } = await GarageModel.searchGarages(query, limit, offset);
+
+    res.status(200).json({
+      results,
+      total,
+      page: Number(page),
+      totalPages: Math.ceil(total / limit),
+    });
+  } catch (error) {
+    console.error('Error retrieving garages:', error);
+    res.status(500).json({ error: 'Error retrieving garages' });
+  }
+});
+
 module.exports = router;
