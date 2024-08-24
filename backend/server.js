@@ -12,9 +12,6 @@ const packagesRoutes = require('./routes/packagesRoutes');
 const garageRoutes = require('./routes/garageRoutes');
 const newsRoutes = require('./routes/newsRoutes');
 
-
-
-
 dotenv.config();
 
 const app = express();
@@ -38,10 +35,7 @@ app.use('/api/offers', offersRoutes);
 app.use('/api/packages', packagesRoutes);
 app.use('/api/news', newsRoutes);
 app.use('/uploads', express.static('uploads'));
-
-
-
-
+// app.use('/api/garages/search', garageRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
